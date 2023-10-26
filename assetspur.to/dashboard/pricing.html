@@ -359,7 +359,7 @@
                         <input type="hidden" name="duration" value="4 days">
                         <input type="hidden" name="id" value="9">
                         <button type="button"  class="btn btn-block block  btn-primary"
-                        onclick="takeplan3()" id="takeplan3">Join contract</button>									</form>
+                         id="takeplan3">Join contract</button>									</form>
                 </div>
             </div>
         </div>
@@ -390,7 +390,7 @@
 										<input type="hidden" name="duration" value="1 week">
 										<input type="hidden" name="id" value="5">
 										<!-- <input type="submit" class="btn btn-block pricing-action btn-primary" value="Join contract"> -->
-										<button type="button" id="takeplan" class="btn btn-block block  btn-primary" onclick="takeplan1()">Join contract</button>
+										<button type="button" id="takeplan" class="btn btn-block block  btn-primary" >Join contract</button>
 									</form>
 								</div>
 							</div>
@@ -422,7 +422,7 @@
 										
 										<input type="hidden" name="duration" value="4 days">
 										<input type="hidden" name="id" value="9">
-										<button type="button" id="takeplan2" class="btn btn-block block  btn-primary" onclick="takeplan2()" id="takeplan1">Join contract</button>									</form>
+										<button type="button" id="takeplan2" class="btn btn-block block  btn-primary"  id="takeplan1">Join contract</button>									</form>
 								</div>
 							</div>
 						</div>
@@ -430,19 +430,19 @@
 							<div class="pricing-table card purple border bg-dark shadow p-4">
 								<!-- Table Head -->
 								
-								<h2 class="text-light" id="">CONTRACT-3(SOLD OUT)</h2>
+								<h2 class="text-light contract-name" id="">CONTRACT-3(SOLD OUT)</h2>
 								<!-- Price -->
 								<div class="price-tag">
 									<span class="symbol text-light">$</span>
-									<span class="amount text-light" id="">300</span>
+									<span class="amount price text-light" id="">300</span>
 								</div>
 								<!-- Features -->
 								<div class="pricing-features">
-									<div class="feature text-light">Minimum Possible Deposit:<span class="text-light">$300</span></div>
-                                    <div class="feature text-light">Maximum Possible Deposit:<span class="text-light">$499</span></div>
+									<div class="feature min-deposit text-light">Minimum Possible Deposit:<span class="text-light">$300</span></div>
+                                    <div class="feature max-deposit text-light">Maximum Possible Deposit:<span class="text-light">$499</span></div>
 									
-									<div class="feature text-light">Gift Bonus:<span class="text-light">$0</span></div>
-									<div class="feature text-light">Duration:<span class="text-light">7 days</span></div>
+									<div class="feature gift-bonus text-light">Gift Bonus:<span class="text-light">$0</span></div>
+									<div class="feature duration text-light">Duration:<span class="text-light">7 days</span></div>
 								</div> <br>
 								<!-- Button -->
 								<div class="">
@@ -610,7 +610,7 @@
    
                            
    
-     async function takeplan1(e){
+                           $("#takeplan").click( async function takeplan1(e){
    var plan=document.getElementById('plan').innerHTML
    localStorage.setItem("plan",plan)
    var dataBtn=document.getElementById('takeplan')
@@ -648,6 +648,7 @@
            }
                 
        }
+                           )
      
        
       $("#takeplan2").click( async function takeplan2(e){

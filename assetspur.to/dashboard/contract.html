@@ -329,10 +329,10 @@
     </div>					<div>
     </div>					<div class="mb-5 row">
         <div class="col-lg-4">
-            <div class="pricing-table card purple border bg-dark shadow p-4" id="contract-7">
+            <div class="pricing-table card purple border bg-dark shadow p-4" id="contract-9">
                 <!-- Table Head -->
                 
-                <h2 class="text-light">CONTRACT 7</h2>
+                <h2 class="text-light">CONTRACT-9</h2>
                 <!-- Price -->
                 <div class="price-tag">
                     <span class="symbol text-light">$</span>
@@ -351,10 +351,10 @@
             </div>
         </div>
 												<div class="col-lg-4">
-							<div class="pricing-table card purple border bg-dark shadow p-4" id="contract-5">
+							<div class="pricing-table card purple border bg-dark shadow p-4" id="contract-7">
 								<!-- Table Head -->
 								
-								<h2 class="text-light">CONTRACT 5</h2>
+								<h2 class="text-light">CONTRACT-7</h2>
 								<!-- Price -->
 								<div class="price-tag">
 									<span class="symbol text-light">$</span>
@@ -373,10 +373,10 @@
 							</div>
 						</div>
 												<div class="col-lg-4">
-							<div class="pricing-table card purple border bg-dark shadow p-4" id="contract-3">
+							<div class="pricing-table card purple border bg-dark shadow p-4" id="contract-5">
 								<!-- Table Head -->
 								
-								<h2 class="text-light"> CONTRACT 3</h2>
+								<h2 class="text-light"> CONTRACT-5</h2>
 								<!-- Price -->
 								<div class="price-tag">
 									<span class="symbol text-light">$</span>
@@ -408,32 +408,31 @@
 		</div>
 	</div>
     <script>
-          var contract3=document.getElementById("contract-3");
-            var contract5= document.getElementById("contract-5");
+          var contract5=document.getElementById("contract-5");
             var contract7= document.getElementById("contract-7");
+            var contract9= document.getElementById("contract-9");
              
         function checkplan(){
-            console.log(contract3,contract5,contract7);
+            console.log(contract5,contract7,contract9);
             var plan=localStorage.getItem('plan')
         
         
       
         console.log(plan);
-        if (plan=="CONTRACT-3"){
+        if (plan=="CONTRACT-5"){
+        contract7.style.display="none"
+        contract9.style.display="none"
+        }
+        
+        else if(plan=="CONTRACT-7" ){
         contract5.style.display="none"
-        contract7.style.display="none"
-        }
-        
-        else if(plan=="CONTRACT-5" ){
-        contract3.style.display="none"
-        contract7.style.display="none"
+        contract9.style.display="none"
         
         }
         
-        else if(plan=="CONTRACT-7"){
+        else if(plan=="CONTRACT-9"){
             contract5.style.display="none"
-        
-            contract3.style.display="none"
+            contract7.style.display="none"
         
         }
         
