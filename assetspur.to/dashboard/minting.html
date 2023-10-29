@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -50,6 +50,115 @@
 
     // Call the function to fetch and display images
     fetchImages();
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="image-grid" class="image-grid"></div>
+
+  <script>
+    const imageGrid = document.getElementById('image-grid');
+
+    const cloudName = 'your-cloud-name'; // Replace with your Cloudinary cloud name
+    const apiKey = 'your-api-key'; // Replace with your Cloudinary API key
+
+    // You might want to use a server to securely store your API secret and perform this request.
+    // In this example, we'll fetch the images directly from Cloudinary. However, for production, it's recommended to use a server to secure your API secret.
+    // const apiSecret = 'your-api-secret'; // Replace with your Cloudinary API secret
+
+    const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/image/list/your-folder-name.json`;
+
+    fetch(cloudinaryUrl)
+      .then(response => response.json())
+      .then(data => {
+        // Loop through the images and display them in the grid
+        data.resources.forEach(image => {
+          const imageUrl = image.url;
+          const imageElement = document.createElement('img');
+          imageElement.src = imageUrl;
+          imageElement.className = 'image';
+          imageGrid.appendChild(imageElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching images:', error);
+      });
+  </script>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="image-grid" class="image-grid"></div>
+
+  <script>
+    function fetchAndDisplayImages() {
+      const imageGrid = document.getElementById('image-grid');
+
+      const cloudName = 'your-cloud-name'; // Replace with your Cloudinary cloud name
+      const apiKey = 'your-api-key'; // Replace with your Cloudinary API key
+
+      // You might want to use a server to securely store your API secret and perform this request.
+      // In this example, we'll fetch the images directly from Cloudinary. However, for production, it's recommended to use a server to secure your API secret.
+      // const apiSecret = 'your-api-secret'; // Replace with your Cloudinary API secret
+
+      const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/image/list/your-folder-name.json`;
+
+      fetch(cloudinaryUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Loop through the images and display them in the grid
+          data.resources.forEach(image => {
+            const imageUrl = image.url;
+            const imageElement = document.createElement('img');
+            imageElement.src = imageUrl;
+            imageElement.className = 'image';
+            imageGrid.appendChild(imageElement);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching images:', error);
+        });
+    }
+
+    // Call the function when the page loads
+    window.onload = fetchAndDisplayImages;
   </script>
 </body>
 </html>

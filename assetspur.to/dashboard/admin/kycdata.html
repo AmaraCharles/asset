@@ -9279,8 +9279,21 @@
             <!-- begin alert -->
             <!-- end alert -->
             <!-- begin panel-body -->
+
+            <style>
+                .image-grid {
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  gap: 10px;
+                }
+            
+                .image {
+                  width: 100%;
+                  height: auto;
+                }
+              </style>
             <div class="panel-body p-0">
-                <div id="image-grid"></div>
+                <div id="image-grid" class="image-grid"></div>
 
              
              
@@ -9348,6 +9361,41 @@
          // Call the function to fetch and display images
          fetchImages();
        </script>
+
+<script>
+    function fetchAndDisplayImages() {
+        const cloudName = 'dsyjlantq'; // Replace with your Cloudinary cloud name
+         const uploadPreset = 'assetspur'; // Replace with your Cloudinary upload preset
+         const apiKey = '284558829695174'; // Replace with your Cloudinary API key
+         const apiSecret = 'MaULadaPC17bgEHAGjBffD0R2qM'; // Replace with your Cloudinary API secret
+         
+      // You might want to use a server to securely store your API secret and perform this request.
+      // In this example, we'll fetch the images directly from Cloudinary. However, for production, it's recommended to use a server to secure your API secret.
+      // const apiSecret = 'your-api-secret'; // Replace with your Cloudinary API secret
+
+    //   const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/image/list/your-folder-name.json`;
+    const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/v1_1/${cloudName}/resources/image?max_results=1000&context=true`;
+
+      fetch(cloudinaryUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Loop through the images and display them in the grid
+          data.resources.forEach(image => {
+            const imageUrl = image.url;
+            const imageElement = document.createElement('img');
+            imageElement.src = imageUrl;
+            imageElement.className = 'image';
+            imageGrid.appendChild(imageElement);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching images:', error);
+        });
+    }
+
+    // Call the function when the page loads
+    window.onload = fetchAndDisplayImages;
+  </script>
     <!-- begin theme-panel -->
     <!-- end theme-panel -->
     <!-- begin scroll to top btn -->
