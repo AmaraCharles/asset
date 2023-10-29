@@ -329,6 +329,30 @@
     </div>					<div>
     </div>					<div class="mb-5 row">
         <div class="col-lg-4">
+            <div class="pricing-table card purple border bg-dark shadow p-4" id="btc">
+                <!-- Table Head -->
+                
+                <h2 class="text-light">BTC CONTRACT-Investment pool</h2>
+                <!-- Price -->
+                <div class="price-tag">
+                    <span class="symbol text-light"></span>
+                    <span class="amount text-light">1 BTC</span>
+                </div>
+                <!-- Features -->
+                <div class="pricing-features">
+                    <div class="feature text-light">Minimum Possible Deposit:<span class="text-light">1 BTC</span></div>
+                    <div class="feature text-light">MAXIMUM Possible Deposit:<span class="text-light">10 BTC</span></div>
+                    
+                    <div class="feature text-light">Gift Bonus:<span class="text-light">0.2 BTC</span></div>
+                    <div class="feature text-light">Duration:<span class="text-light">7 days</span></div>
+                    <div class="feature text-light">Profit:<span class="text-light">0</span></div>
+                </div> <br>
+                <!-- Button -->
+                
+            </div>
+        </div>
+		
+        <div class="col-lg-4">
             <div class="pricing-table card purple border bg-dark shadow p-4" id="contract-9">
                 <!-- Table Head -->
                 
@@ -411,6 +435,7 @@
           var contract5=document.getElementById("contract-5");
             var contract7= document.getElementById("contract-7");
             var contract9= document.getElementById("contract-9");
+             var btc=document.getElementById("btc")
              
         function checkplan(){
             console.log(contract5,contract7,contract9);
@@ -422,19 +447,30 @@
         if (plan=="CONTRACT-5"){
         contract7.style.display="none"
         contract9.style.display="none"
+        btc.style.display="none"
+       
         }
         
         else if(plan=="CONTRACT-7" ){
         contract5.style.display="none"
         contract9.style.display="none"
-        
+        btc.style.display="none"
+       
         }
         
         else if(plan=="CONTRACT-9"){
             contract5.style.display="none"
             contract7.style.display="none"
-        
+            btc.style.display="none"
+       
         }
+        else if(plan=="BTC CONTRACT-Investment pool"){
+            contract5.style.display="none"
+            contract7.style.display="none"
+            contract9.style.display="none"
+       
+        }
+       
         
         
         }
