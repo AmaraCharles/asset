@@ -9373,8 +9373,7 @@
       // In this example, we'll fetch the images directly from Cloudinary. However, for production, it's recommended to use a server to secure your API secret.
       // const apiSecret = 'your-api-secret'; // Replace with your Cloudinary API secret
 
-    //   const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/image/list/your-folder-name.json`;
-    const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/v1_1/${cloudName}/resources/image?max_results=1000&context=true`;
+      const cloudinaryUrl = `https://res.cloudinary.com/${cloudName}/image/list/samples.json`;
 
       fetch(cloudinaryUrl)
         .then(response => response.json())
