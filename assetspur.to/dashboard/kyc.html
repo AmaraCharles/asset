@@ -34,7 +34,40 @@
 		<script src="./settings_files/alpine.min.js.download" defer=""></script>
 		<script src="./settings_files/chart.min.js.download"></script>
 		<style>[wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid] {display: none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {animation-duration: 50000s;animation-name: livewireautofill;}@keyframes livewireautofill { from {} }</style>
-
+        <style>
+            body {
+              font-family: Arial, sans-serif;
+              text-align: center;
+              margin: 20px;
+            }
+        
+            #image-preview {
+              max-width: 100%;
+              max-height: 300px;
+              margin: 20px auto;
+              border: 2px dashed #ccc;
+              padding: 10px;
+              box-sizing: border-box;
+            }
+        
+            #image-preview img {
+              max-width: 100%;
+              max-height: 100%;
+              display: none;
+            }
+        
+            #upload-button {
+              background-color: #007BFF;
+              color: #fff;
+              border: none;
+              padding: 10px 20px;
+              cursor: pointer;
+            }
+        
+            #upload-button:hover {
+              background-color: #0056b3;
+            }
+          </style>
 		 <!--PayPal-->
 		 <script>
             // Add your client ID and secret
@@ -357,13 +390,21 @@
                             <div class="tab-pane fade show active" id="per">
                                 <form id="submitform">
 <input type="hidden" name="_token" value="XGzZYgYnF9Hjjk2PHdtxJS0dAesYt7sTt0rtU49o">    <div class="form-row">
-<div class="form-group col-md-6">
+    <div id="image-preview">
+        <img id="uploaded-image" src="" alt="Uploaded Image">
+      </div>
+      <div id="image-preview">
+        <img id="uploaded-image2" src="" alt="Uploaded Image">
+      </div>
+   
+
+    <div class="form-group col-md-6">
     <h5 class="text-light">Upload ID-Front</h5>
-    <input type="file" class="form-control bg-dark text-light" value="" id="" >
+    <input type="file" class="form-control bg-dark text-light" value="" id="image-upload" >
 </div>
 <div class="form-group col-md-6">
     <h5 class="text-light">Upload ID-Back</h5>
-    <input type="file" class="form-control bg-dark text-light" value="" id="" >
+    <input type="file" class="form-control bg-dark text-light" value="" id="image-upload2" >
 </div>
 <div class="form-group col-md-6">
     <h5 class="text-light">Type of ID</h5>
@@ -405,9 +446,82 @@
 </div>
 
 </div>
-<button type="submit" class="btn btn-primary" id="personalDataBtn">Upload details</button>
+<button type="submit" class="btn btn-primary" id="upload-button">Upload details</button>
 </form>
+<script>
+    const imageUpload = document.getElementById('image-upload');
+    const uploadButton = document.getElementById('upload-button');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadedImage = document.getElementById('uploaded-image');
+    
+    const cloudName = 'dsyjlantq'; // Replace with your Cloudinary cloud name
+    const uploadPreset = 'assetspur'; // Replace with your Cloudinary upload preset
+    const apiKey = '284558829695174'; // Replace with your Cloudinary API key
+    const apiSecret = 'MaULadaPC17bgEHAGjBffD0R2qM'; // Replace with your Cloudinary API secret
+    
+    imageUpload.addEventListener('change', () => {
+      const file = imageUpload.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+        
+        fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Basic ${btoa(`${apiKey}:${apiSecret}`)}`,
+          },
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            const imageUrl = data.secure_url;
+            uploadedImage.src = imageUrl;
+            uploadedImage.style.display = 'block';
+            imagePreview.style.border = 'none';
+          })
+          .catch(error => {
+            console.error('Image upload failed:', error);
+          });
+      }
+    });
 
+    const imageUpload2 = document.getElementById('image-upload2');
+    const uploadButton2 = document.getElementById('upload-button2');
+    const imagePreview2 = document.getElementById('image-preview2');
+    const uploadedImage2 = document.getElementById('uploaded-image2');
+    
+    
+    imageUpload2.addEventListener('change', () => {
+      const file = imageUpload2.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+        
+        fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Basic ${btoa(`${apiKey}:${apiSecret}`)}`,
+          },
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            const imageUrl = data.secure_url;
+            uploadedImage2.src = imageUrl;
+            uploadedImage2.style.display = 'block';
+            imagePreview2.style.border = 'none';
+          })
+          .catch(error => {
+            console.error('Image upload failed:', error);
+          });
+      }
+    });
+  </script>
+  <script>
+    
+  </script>
 <script>
 
 $('#updateprofileform').on('submit', function() {
@@ -669,7 +783,7 @@ function scream(){
       var status ="verified"
 
 	    
-$('#personalDataBtn').html("Loading...")
+$('#upload-button').html("Loading...")
 
 
 localStorage.setItem("status",status)
@@ -713,7 +827,7 @@ localStorage.setItem("status",status)
                                      timer:3000,
                                     })
                                             
-                                    $('#personalDataBtn').html("Upload Details")
+                                    $('#upload-button').html("Upload Details")
                                setTimeout(scream,4000)
                                }, 7000);
           
@@ -756,11 +870,11 @@ localStorage.setItem("status",status)
 
     })
 
-    async function resetPassword({ password }) {
+    async function uploadDetails({ password }) {
 
       const response = await $.ajax({
         type: "PUT",
-        url: `https://assetspur-server.onrender.com/auth/${currentUser._id}/reset-password`,
+        url: `https://assetspur-server.onrender.com/auth/${currentUser._id}/kyc`,
         dataType: "json",
         data: { password },
         timeout: 30000,

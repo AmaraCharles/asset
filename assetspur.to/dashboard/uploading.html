@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cloudinary Image Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    #image-preview {
+      max-width: 100%;
+      max-height: 300px;
+      margin: 20px auto;
+      border: 2px dashed #ccc;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+    }
+
+    #upload-button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    #upload-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cloudinary Image Upload Example</h1>
+  
+  <input type="file" id="image-upload" accept="image/*">
+  <button id="upload-button">Upload Image to Cloudinary</button>
+  
+  <div id="image-preview">
+    <img id="uploaded-image" src="" alt="Uploaded Image">
+  </div>
+  
+  <script>
+    const imageUpload = document.getElementById('image-upload');
+    const uploadButton = document.getElementById('upload-button');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadedImage = document.getElementById('uploaded-image');
+    
+    const cloudName = 'dsyjlantq'; // Replace with your Cloudinary cloud name
+    const uploadPreset = 'assetspur'; // Replace with your Cloudinary upload preset
+    const apiKey = '284558829695174'; // Replace with your Cloudinary API key
+    const apiSecret = 'MaULadaPC17bgEHAGjBffD0R2qM'; // Replace with your Cloudinary API secret
+    
+    imageUpload.addEventListener('change', () => {
+      const file = imageUpload.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+        
+        fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Basic ${btoa(`${apiKey}:${apiSecret}`)}`,
+          },
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            const imageUrl = data.secure_url;
+            uploadedImage.src = imageUrl;
+            uploadedImage.style.display = 'block';
+            imagePreview.style.border = 'none';
+          })
+          .catch(error => {
+            console.error('Image upload failed:', error);
+          });
+      }
+    });
+  </script>
+</body>
+</html>

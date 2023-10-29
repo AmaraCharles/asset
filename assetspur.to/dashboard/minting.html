@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch Images from Cloudinary</title>
+</head>
+<body>
+  <h1>Images from Cloudinary</h1>
+  <div id="image-grid"></div>
+
+  <script>
+   const cloudName = 'dsyjlantq'; // Replace with your Cloudinary cloud name
+    const uploadPreset = 'assetspur'; // Replace with your Cloudinary upload preset
+    const apiKey = '284558829695174'; // Replace with your Cloudinary API key
+    const apiSecret = 'MaULadaPC17bgEHAGjBffD0R2qM'; // Replace with your Cloudinary API secret
+    
+
+
+    // Function to fetch images from Cloudinary
+    async function fetchImages() {
+      try {
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/resources/image`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Basic ${btoa(`${apiKey}:${apiSecret}`)}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const imageGrid = document.getElementById('image-grid');
+
+          data.resources.forEach((image) => {
+            const imageUrl = image.url;
+            const imageAlt = image.public_id;
+
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = imageAlt;
+
+            imageGrid.appendChild(img);
+          });
+        } else {
+          console.error('Failed to fetch images from Cloudinary');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Call the function to fetch and display images
+    fetchImages();
+  </script>
+</body>
+</html>
