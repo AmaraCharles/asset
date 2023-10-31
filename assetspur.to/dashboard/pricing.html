@@ -501,6 +501,7 @@
 	</div>
 
     <script>
+        const plans=[]
      
         function red () {
            var btn= document.getElementsByClassName('btn')
@@ -672,6 +673,10 @@
                            $("#takeplan").click( async function takeplan1(e){
    var plan=document.getElementById('plan').innerHTML
    localStorage.setItem("plan",plan)
+   var reviewed=[...plans,plan]
+   localStorage.setItem("reviewed",reviewed)
+
+  
    var dataBtn=document.getElementById('takeplan')
            dataBtn.innerHTML="Processing...";
            dataBtn.style.opacity='0.5'
@@ -686,7 +691,7 @@
              const to=user.email;
             const timestamp=new Date()
    const balance=user.balance;
-           if(balance <= Number(amount)){
+           if(balance <= Number(amount)){ 
    
                swal({
                                     title: "Notification",
@@ -699,18 +704,24 @@
                                    dataBtn.style.opacity="1"
 // location.href="pricing.html"
                                   }
+
                                  setTimeout(reset,2000)
+
+
            }
            else if (balance>=Number(amount)){
        console.log(timestamp,amount,method,from)
        await depositFnc({ amount,  method, userId, from,timestamp,to });
            }
                 
-       }
-                           )
+       })
+
+
+
      
        
-      $("#takeplan2").click( async function takeplan2(e){
+      
+       $("#takeplan2").click( async function takeplan2(e){
    var plan2=document.getElementById('plan2').innerHTML
    localStorage.setItem("plan",plan2)
    
@@ -753,6 +764,7 @@
        }
       )
      
+      
       $('#takeplanBTC').click(  async function takeplan3(e){
    var plan3=document.getElementById('btc').innerHTML
    localStorage.setItem("plan",planBTC)

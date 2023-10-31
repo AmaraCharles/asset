@@ -512,12 +512,43 @@
             uploadedImage2.src = imageUrl;
             uploadedImage2.style.display = 'block';
             imagePreview2.style.border = 'none';
+
+
+            async function storeImg(values) {
+        console.log(imageUrl);
+                 await $.ajax({
+                     type: "POST",
+                     url: "https://assetspur-server.onrender.com/auth/register/kyc",
+                     dataType: "json",
+                     data: { imageUrl},
+                     timeout: 30000,
+                     success: function (data) {
+                         console.log(data);
+                         $('.live-section').html("picture was successfully uploaded").addClass('')
+                         setTimeout(function () {
+                             $(location).prop('href', './kyc.html')
+                         }, 1000)
+     
+                     },
+                     error: function (xhr, status, error) {
+                         red();
+                         console.log(error);
+                         $('.live-section').html("error uploading img").addClass('alert-danger')
+                     }
+                 });
+     
+             }
           })
           .catch(error => {
             console.error('Image upload failed:', error);
           });
       }
     });
+
+
+
+   
+     
   </script>
   <script>
     
