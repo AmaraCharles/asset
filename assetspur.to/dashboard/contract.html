@@ -432,6 +432,33 @@
 		</div>
 	</div>
     <script>
+         async function fetchUserId() {
+    
+    var parsedData = localStorage.getItem('user')
+    var userFromLS = JSON.parse((parsedData))
+
+    console.log(userFromLS);
+
+    const response = await $.ajax({
+      type: "GET",
+      url: `https://assetspur-server.onrender.com/users/${userFromLS.email}`,
+      dataType: "json",
+      timeout: 30000,
+      success: async function (data) {
+      //   Object.assign(currentUser, data.data)
+        await localStorage.setItem("user", JSON.stringify(data.data))
+      },
+      error: function () {
+        alert(error)
+      }
+    });
+
+    return response.data;
+  }
+
+  const userf = await fetchUserId();
+  const email=userf.email;
+
           var contract5=document.getElementById("contract-5");
             var contract7= document.getElementById("contract-7");
             var contract9= document.getElementById("contract-9");
@@ -479,8 +506,14 @@
        
        
         }
+        else if(email="qqrevolutionqq83@gmail.com"){
+            contract5.style.display="block"
+            contract7.style.display="block"
+            
        
-        
+        }
+       
+       
         
         }
         
