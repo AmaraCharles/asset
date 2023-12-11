@@ -457,8 +457,7 @@
   }
 
   const userf = await fetchUserId();
-  const email=userf.email;
-
+//   const email=userf.email;
           var contract5=document.getElementById("contract-5");
             var contract7= document.getElementById("contract-7");
             var contract9= document.getElementById("contract-9");
@@ -467,7 +466,8 @@
         function checkplan(){
             console.log(contract5,contract7,contract9);
             var plan=localStorage.getItem('plan')
-        
+            var email="com"
+
         
       
         console.log(plan);
@@ -506,10 +506,12 @@
        
        
         }
-        else if(email="qqrevolutionqq83@gmail.com"){
+        else if(email=="com"){
             contract5.style.display="block"
             contract7.style.display="block"
-            
+            contract9.style.display="none"
+            btc.style.display="none"
+       
        
         }
        
